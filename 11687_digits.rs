@@ -8,7 +8,7 @@ fn main() {
         if option.trim() == "END" {
             break;
         } else {
-            number = match option.trim().parse() {
+            number = match option.trim().parse::<isize>() {
                 Ok(numbe) => numbe,
                 Err(_) => -1,
             };
@@ -19,21 +19,14 @@ fn main() {
 }
 
 fn index_v(number: isize) -> i64 {
-    let auxiliary: i64;
+    let mut auxiliary: i64 = 1;
     let mut auxiliary_number: isize = number;
-    let mut vector_number: Vec<isize> = Vec::new();
-    vector_number.push(auxiliary_number);
-    let mut iterator: isize = 1;
     loop {
-        auxiliary_number = counter_number(auxiliary_number);
-        vector_number.push(auxiliary_number);
-        if vector_number.len() >= 2
-            && vector_number[(iterator - 1) as usize] == vector_number[iterator as usize]
-        {
-            auxiliary = iterator as i64;
+        if auxiliary_number == counter_number(auxiliary_number) {
             break;
         } else {
-            iterator = iterator + 1;
+            auxiliary_number = counter_number(auxiliary_number);
+            auxiliary = auxiliary + 1;
             continue;
         }
     }
